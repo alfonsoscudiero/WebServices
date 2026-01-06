@@ -2,15 +2,13 @@
  * This is the application server
  * ******************************************/
 const express = require('express');
-
 const app = express();
 
-/* ******************************************
- * Default GET route
- * ***************************************** */
-app.get('/', (req, res) => {
-    res.send('Welcome to the CSE 341 Course!');
-});
+/* ***********************
+ * Routes
+ *************************/
+const lesson1Routes = require('./routes/lesson1');
+app.use('/', lesson1Routes);
 
 /* ******************************************
  * Server port
