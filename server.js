@@ -7,7 +7,7 @@ const app = express();
 /* ***********************
  * Routes
  *************************/
-const lesson1Routes = require('./routes/lesson1');
+const lesson1Routes = require('./routes');
 app.use('/', lesson1Routes);
 
 /* ******************************************
