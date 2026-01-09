@@ -9,7 +9,7 @@ const welcomeRoute = (req, res) => {
 
 // GET /student
 const studentRoute = (req, res) => {
-    res.send('Student dashboard coming soon!');
+    res.send('Welcome Back Alfonso!');
 };
 
 // GET /hello
@@ -19,7 +19,7 @@ const helloRoute = (req, res) => {
 
 // Export controller funtions
 module.exports = {
-  welcomeRoute,
-  studentRoute,
-  helloRoute, 
+    welcomeRoute,
+    studentRoute,
+    helloRoute, 
 }

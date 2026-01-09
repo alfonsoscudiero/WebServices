@@ -10,9 +10,9 @@ const lesson1Controller = require('../controllers/lesson1');
 // http://localhost:3000/
 router.get('/', lesson1Controller.welcomeRoute);
 
-// Route: GET /student
-// http://localhost:3000/student
-router.get('/student', lesson1Controller.studentRoute);
+// Route: GET /alfonso
+// http://localhost:3000/alfonso
+router.get('/alfonso', lesson1Controller.studentRoute);
 
 // Route: GET /hello
 // http://localhost:3000/hello
