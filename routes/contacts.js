@@ -9,4 +9,7 @@ const contactsController = require('../controllers/contacts');
 // GET url/contacts
 router.get('/contacts', contactsController.getContacts);
 
+// GET '/contacts/single?id=<mongoObjectId>'
+router.get('/contacts/single', contactsController.getContactById)
+
 module.exports = router;
