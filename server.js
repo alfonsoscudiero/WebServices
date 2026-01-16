@@ -20,9 +20,11 @@ app.use(express.json());
  * Routes
  *************************/
 const lesson1Routes = require('./routes');
+const contactRoute = require('./routes/contacts');
 
 // Route registration
 app.use('/', lesson1Routes);
+app.use('/', contactRoute);
 
 /* ******************************************
  * Server configuration

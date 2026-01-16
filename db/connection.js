@@ -4,6 +4,7 @@
  * *************************************** */
 const { MongoClient } = require('mongodb');
 
+// Cached database instance to the connected MongoDB database
 let db;
 
 // Connect to MongoDB
