@@ -27,7 +27,7 @@ const getContacts = async (req, res) => {
 // Controller for GET '/contacts/single?id=<mongoObjectId>'
 const getContactById = async (req, res) => {
   try {
-    const { id } = req.query;
+    const { id } = req.params;
 
     if (!id) {
       return res.status(400).json({ message: '[controllers/contacts] Missing id query parameter.'});
