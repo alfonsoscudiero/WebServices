@@ -3,3 +3,9 @@ GET http://localhost:3000/contacts
 
 ### Get contact by ID
 GET http://localhost:3000/contacts/696a7f5b7e14e3873ceb09c3
+
+### Get all contacts (RENDER)
+GET https://cse341-winter26.onrender.com/contacts
+
+### Get contact by ID (RENDER)
+GET https://cse341-winter26.onrender.com/contacts/696a7f5b7e14e3873ceb09c3
