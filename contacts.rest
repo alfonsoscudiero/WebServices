@@ -9,3 +9,27 @@ GET https://cse341-winter26.onrender.com/contacts
 
 ### Get contact by ID (RENDER)
 GET https://cse341-winter26.onrender.com/contacts/696a7f5b7e14e3873ceb09c3
+
+### Create a new contact (LOCAL)
+POST http://localhost:3000/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Gerald",
+  "lastName": "Causee",
+  "email": "gcausee@churchhq.org",
+  "favoriteColor": "Red",
+  "birthday": "1963-05-20"
+}
+
+### Create a new contact (RENDER)
+POST https://cse341-winter26.onrender.com/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Gerald",
+  "lastName": "Causee",
+  "email": "gcausee@churchhq.org",
+  "favoriteColor": "Red",
+  "birthday": "1963-05-20"
+}
