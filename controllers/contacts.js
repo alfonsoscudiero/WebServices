@@ -1,6 +1,23 @@
 /* ***************************
  *  controllers/contacts.js
  * ************************** */
+// Used to validate request body for contacts endpoints
+const Joi = require("joi");
+
+// Schema for validating contact data
+const contactSchema = Joi.object({
+  firstName: Joi.string().trim().min(1).max(30),
+  lastName: Joi.string().trim().min(1).max(30),
+  email: Joi.string().trim().email(),
+  favoriteColor: Joi.string().trim().min(1).max(30),
+  birthday: Joi.date().iso().min("1900-01-01").max("now").messages({
+    "date.base": "birthday must be a valid date",
+    "date.format": "birthday must be in YYYY-MM-DD format",
+    "date.min": "birthday must be after January 1, 1900",
+    "date.max": "birthday cannot be in the future",
+  }),
+});
+
 // MongoDB ObjectId utility and database connection
 const { ObjectId } = require("mongodb");
 const { connectToDatabase } = require("../db/connection");
@@ -73,37 +90,40 @@ const getContactById = async (req, res) => {
 // Controller for POST /contacts
 const createContact = async (req, res) => {
   try {
-    // Pull fields from the request body
-    const { firstName, lastName, email, favoriteColor, birthday } = req.body;
+    // Validate body with Joi
+    const { value, error } = contactSchema.validate(req.body, {
+      abortEarly: false, // Joi returns all validation errors
+      convert: false, // Joi does not change types
+      stripUnknown: true, // Joi removes fields not in the schema
+      presence: "required", // Joi makes all schema fields required by default
+      errors: { wrap: { label: false } }, // Remove quotes in message
+    });
 
-    // Validate all fields required
-    if (!firstName || !lastName || !email || !favoriteColor || !birthday) {
+    if (error) {
       return res.status(400).json({
-        message:
-          "[controllers/createContact] All fields are required: firstName, lastName, email, favoriteColor, birthday.",
+        message: "Validation failed",
+        details: error.details.map((d) => d.message),
       });
     }
 
-    // Build the document
+    // Build new contact object
     const newContact = {
-      firstName: String(firstName).trim(),
-      lastName: String(lastName).trim(),
-      email: String(email).trim().toLowerCase(),
-      favoriteColor: String(favoriteColor).trim(),
-      birthday: String(birthday).trim(),
+      firstName: value.firstName,
+      lastName: value.lastName,
+      email: value.email.toLowerCase(),
+      favoriteColor: value.favoriteColor,
+      birthday: value.birthday,
     };
 
-    // Insert into MongoDB
+    // Insert
     const db = await connectToDatabase();
     const result = await db.collection("contacts").insertOne(newContact);
 
-    // Return 201 + new id
+    // Return 201 + id
     return res.status(201).json({ id: result.insertedId });
-  } catch (error) {
-    console.error("[controllers/createContact] Create contact error:", error);
-    return res.status(500).json({
-      message: "[controllers/createContact] Failed to create contact.",
-    });
+  } catch (err) {
+    console.error("[controllers/createContact] error:", err);
+    return res.status(500).json({ message: "Failed to create contact" });
   }
 };
 
