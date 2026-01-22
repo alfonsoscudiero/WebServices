@@ -2,7 +2,7 @@
  * db/connection.js
  * DB conncetion module
  * *************************************** */
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require("mongodb");
 
 // Cached database instance to the connected MongoDB database
 let db;
@@ -12,17 +12,17 @@ async function connectToDatabase() {
   if (db) {
     return db;
   }
-  
+
   // Environment Variable
   const uri = process.env.MONGODB_URI;
   const dbName = process.env.DB_NAME;
 
   if (!uri) {
-    throw new Error('[db/connection] MONGODB_URI is not defined in .env');
+    throw new Error("[db/connection] MONGODB_URI is not defined in .env");
   }
 
   if (!dbName) {
-    throw new Error('[db/connection] DB_NAME is not defined in .env');
+    throw new Error("[db/connection] DB_NAME is not defined in .env");
   }
 
   const client = new MongoClient(uri);
@@ -35,5 +35,5 @@ async function connectToDatabase() {
 }
 
 module.exports = {
-  connectToDatabase
+  connectToDatabase,
 };
