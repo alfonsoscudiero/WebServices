@@ -70,7 +70,45 @@ const getContactById = async (req, res) => {
   }
 };
 
+// Controller for POST /contacts
+const createContact = async (req, res) => {
+  try {
+    // Pull fields from the request body
+    const { firstName, lastName, email, favoriteColor, birthday } = req.body;
+
+    // Validate all fields required
+    if (!firstName || !lastName || !email || !favoriteColor || !birthday) {
+      return res.status(400).json({
+        message:
+          "[controllers/createContact] All fields are required: firstName, lastName, email, favoriteColor, birthday.",
+      });
+    }
+
+    // Build the document
+    const newContact = {
+      firstName: String(firstName).trim(),
+      lastName: String(lastName).trim(),
+      email: String(email).trim().toLowerCase(),
+      favoriteColor: String(favoriteColor).trim(),
+      birthday: String(birthday).trim(),
+    };
+
+    // Insert into MongoDB
+    const db = await connectToDatabase();
+    const result = await db.collection("contacts").insertOne(newContact);
+
+    // Return 201 + new id
+    return res.status(201).json({ id: result.insertedId });
+  } catch (error) {
+    console.error("[controllers/createContact] Create contact error:", error);
+    return res.status(500).json({
+      message: "[controllers/createContact] Failed to create contact.",
+    });
+  }
+};
+
 module.exports = {
   getContacts,
   getContactById,
+  createContact,
 };
