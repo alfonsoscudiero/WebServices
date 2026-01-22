@@ -24,7 +24,7 @@ const contactRoute = require("./routes/contacts");
 
 // Route registration
 app.use("/", lesson1Routes);
-app.use("/", contactRoute);
+app.use("/contacts", contactRoute);
 
 /* ******************************************
  * Server configuration

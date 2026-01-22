@@ -6,12 +6,13 @@ const router = express.Router();
 
 const contactsController = require("../controllers/contacts");
 
-// GET url/contacts
-router.get("/contacts", contactsController.getContacts);
+// GET /contacts
+router.get("/", contactsController.getContacts);
 
-// GET '/contacts/:id'
-router.get("/contacts/:id", contactsController.getContactById);
+// GET /contacts/:id
+router.get("/:id", contactsController.getContactById);
 
-//
+// POST /contacts
+router.post("/", contactsController.createContact);
 
 module.exports = router;
