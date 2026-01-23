@@ -15,4 +15,7 @@ router.get("/:id", contactsController.getContactById);
 // POST /contacts
 router.post("/", contactsController.createContact);
 
+// DELETE /contacts/:id
+router.delete("/:id", contactsController.deleteContact);
+
 module.exports = router;
