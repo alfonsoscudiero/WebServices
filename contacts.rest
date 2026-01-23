@@ -33,3 +33,9 @@ Content-Type: application/json
   "favoriteColor": "Red",
   "birthday": "1963-05-20"
 }
+
+### Delete contact by ID  (LOCAL)
+DELETE http://localhost:8080/contacts/696a7f5b7e14e3873ceb09c3
+
+### Delete contact by ID  (RENDER)
+DELETE https://cse341-winter26.onrender.com/contacts/696a7f5b7e14e3873ceb09c3
