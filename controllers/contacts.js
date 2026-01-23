@@ -127,8 +127,42 @@ const createContact = async (req, res) => {
   }
 };
 
+// Controller for DELETE /contacts/:id
+const deleteContact = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validate Mongo ObjectId format
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "[controllers/deleteContact] Invalid contact id format.",
+      });
+    }
+
+    const db = await connectToDatabase();
+
+    const result = await db
+      .collection("contacts")
+      .deleteOne({ _id: new ObjectId(id) });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({
+        message: "[controllers/deleteContact] Contact does not exist.",
+      });
+    }
+
+    return res.status(204).send();
+  } catch (err) {
+    console.error("[controllers/deleteContact] error:", err);
+    return res
+      .status(500)
+      .json({ message: "[controllers/deleteContact] Server error." });
+  }
+};
+
 module.exports = {
   getContacts,
   getContactById,
   createContact,
+  deleteContact,
 };
