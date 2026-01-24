@@ -35,7 +35,33 @@ Content-Type: application/json
 }
 
 ### Delete contact by ID  (LOCAL)
-DELETE http://localhost:8080/contacts/696a7f5b7e14e3873ceb09c3
+DELETE http://localhost:3000/contacts/696a7f5b7e14e3873ceb09c3
 
 ### Delete contact by ID  (RENDER)
 DELETE https://cse341-winter26.onrender.com/contacts/696a7f5b7e14e3873ceb09c3
+
+### Update contact by ID  (LOCAL)
+PUT http://localhost:3000/contacts/696a7f5b7e14e3873ceb09c6
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Jeffrey R.",
+  "lastName": "Holland",
+  "email": "jrholland@churchhq.org",
+  "favoriteColor": "White",
+  "birthday": "1940-12-03"
+}
+
+### Update contact by ID  (RENDER)
+PUT https://cse341-winter26.onrender.com/contacts/696a7f5b7e14e3873ceb09c6
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Jeffrey R.",
+  "lastName": "Holland",
+  "email": "jrholland@churchhq.org",
+  "favoriteColor": "White",
+  "birthday": "1940-12-03"
+}
