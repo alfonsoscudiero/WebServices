@@ -93,7 +93,7 @@ const createContact = async (req, res) => {
     // Validate body with Joi
     const { value, error } = contactSchema.validate(req.body, {
       abortEarly: false, // Joi returns all validation errors
-      convert: false, // Joi does not change types
+      convert: true,
       stripUnknown: true, // Joi removes fields not in the schema
       presence: "required", // Joi makes all schema fields required by default
       errors: { wrap: { label: false } }, // Remove quotes in message
@@ -174,7 +174,7 @@ const updateContact = async (req, res) => {
     // Validate body with Joi
     const { value, error } = contactSchema.validate(req.body, {
       abortEarly: false,
-      convert: false,
+      convert: true,
       stripUnknown: true,
       presence: "required",
       errors: { wrap: { label: false } },
