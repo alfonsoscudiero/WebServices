@@ -160,9 +160,65 @@ const deleteContact = async (req, res) => {
   }
 };
 
+// Controller for UPDATE /contacts/:id
+const updateContact = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validate MongoObjectId format
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "[controllers/updateContact] Invalid contact id format.",
+      });
+    }
+    // Validate body with Joi
+    const { value, error } = contactSchema.validate(req.body, {
+      abortEarly: false,
+      convert: false,
+      stripUnknown: true,
+      presence: "required",
+      errors: { wrap: { label: false } },
+    });
+
+    if (error) {
+      return res.status(400).json({
+        message: "Validation failed",
+        details: error.details.map((d) => d.message),
+      });
+    }
+
+    const updatedContact = {
+      ...value,
+      email: value.email.toLowerCase(),
+    };
+
+    const db = await connectToDatabase();
+
+    const contactId = new ObjectId(id);
+
+    const result = await db
+      .collection("contacts")
+      .updateOne({ _id: contactId }, { $set: updatedContact });
+
+    if (result.matchedCount === 0) {
+      return res
+        .status(404)
+        .json({ message: "[controllers/updateContact] Contact not found." });
+    }
+
+    return res.status(204).send();
+  } catch (err) {
+    console.error("[controllers/updateContact] error:", err);
+    return res
+      .status(500)
+      .json({ message: "[controllers/updateContact] Server error." });
+  }
+};
+
 module.exports = {
   getContacts,
   getContactById,
   createContact,
   deleteContact,
+  updateContact,
 };
