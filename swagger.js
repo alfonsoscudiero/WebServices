@@ -5,11 +5,11 @@ const doc = {
     title: 'Contacts API Documentation',
     description: 'CSE 341 – Contacts routes API documentation',
   },
-  host: 'localhost:8080',
+  host: 'localhost:3000',
   schemes: ['http'],
 };
 
 const outputFile = './swagger.json';
-const endpointsFiles = ['./routes/contacts.js']; // entry point
+const endpointsFiles = ['./server.js']; // entry point
 
 swaggerAutogen(outputFile, endpointsFiles, doc);

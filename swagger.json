@@ -5,13 +5,13 @@
     "description": "CSE 341 – Contacts routes API documentation",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
     "http"
   ],
   "paths": {
-    "/": {
+    "/contacts/": {
       "get": {
         "description": "",
         "responses": {
@@ -41,7 +41,7 @@
         }
       }
     },
-    "/{id}": {
+    "/contacts/{id}": {
       "get": {
         "description": "",
         "parameters": [
