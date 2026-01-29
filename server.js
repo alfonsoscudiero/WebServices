@@ -6,8 +6,8 @@ require("dotenv").config();
 // Express imports
 const express = require("express");
 // Swagger import
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 // Database Connection
 const { connectToDatabase } = require("./db/connection");
@@ -17,12 +17,12 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /* ***********************
  * Routes
  *************************/
-const lesson1Routes = require("./routes");
+// const lesson1Routes = require("./routes");
 const contactRoute = require("./routes/contacts");
 
 // Route registration
