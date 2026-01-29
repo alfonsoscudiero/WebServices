@@ -13,7 +13,8 @@
   "paths": {
     "/contacts/": {
       "get": {
-        "description": "",
+        "summary": "Get all contacts",
+        "description": "Returns an array of all contacts stored in MongoDB.",
         "responses": {
           "200": {
             "description": "OK"
@@ -27,7 +28,8 @@
         }
       },
       "post": {
-        "description": "",
+        "summary": "Create a new contact",
+        "description": "Creates a new contact in MongoDB and returns the inserted id.",
         "responses": {
           "201": {
             "description": "Created"
@@ -43,7 +45,8 @@
     },
     "/contacts/{id}": {
       "get": {
-        "description": "",
+        "summary": "Get contact by id",
+        "description": "Returns a single contact document by MongoDB ObjectId.",
         "parameters": [
           {
             "name": "id",
@@ -67,8 +70,9 @@
           }
         }
       },
-      "delete": {
-        "description": "",
+      "put": {
+        "summary": "Update contact by id",
+        "description": "Updates an existing contact by MongoDB ObjectId. Returns 204 if updated.",
         "parameters": [
           {
             "name": "id",
@@ -92,8 +96,9 @@
           }
         }
       },
-      "put": {
-        "description": "",
+      "delete": {
+        "summary": "Delete contact by id",
+        "description": "Deletes a contact by MongoDB ObjectId. Returns 204 if deleted.",
         "parameters": [
           {
             "name": "id",
