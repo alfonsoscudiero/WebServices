@@ -13,7 +13,14 @@ router.get(
   /* #swagger.description = 'Returns an array of all contacts stored in MongoDB.' */
   /* #swagger.responses[200] = {
       description: 'List of contacts'
-} */
+  } */
+  /* #swagger.responses[404] = {
+        description: 'No contacts found'
+  } */
+
+  /* #swagger.responses[500] = {
+        description: 'Internal server error'
+  } */
   contactsController.getContacts,
 );
 
@@ -31,9 +38,15 @@ router.get(
   /* #swagger.responses[200] = {
         description: 'Contact found'
   } */
+  /* #swagger.responses[400] = {
+        description: 'Invalid id format'
+  } */
   /* #swagger.responses[404] = {
         description: 'Contact not found'
   } */
+  /* #swagger.responses[500] = {
+      description: 'Internal server error'
+} */
   contactsController.getContactById,
 );
 
@@ -54,6 +67,9 @@ router.post(
   } */
   /* #swagger.responses[400] = {
         description: 'Validation failed'
+  } */
+  /* #swagger.responses[500] = {
+        description: 'Internal server error'
   } */
   contactsController.createContact,
 );
@@ -84,6 +100,9 @@ router.put(
   /* #swagger.responses[404] = {
         description: 'Contact not found'
   } */
+  /* #swagger.responses[500] = {
+        description: 'Internal server error'
+  } */
   contactsController.updateContact,
 );
 
@@ -101,8 +120,14 @@ router.delete(
   /* #swagger.responses[204] = {
         description: 'Contact deleted successfully'
   } */
+  /* #swagger.responses[400] = {
+        description: 'Invalid contact id format'
+  } */
   /* #swagger.responses[404] = {
         description: 'Contact not found'
+  } */
+  /* #swagger.responses[500] = {
+        description: 'Internal server error'
   } */
   contactsController.deleteContact,
 );

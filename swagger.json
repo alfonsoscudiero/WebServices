@@ -20,10 +20,10 @@
             "description": "List of contacts"
           },
           "404": {
-            "description": "Not Found"
+            "description": "No contacts found"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       },
@@ -61,7 +61,7 @@
             "description": "Validation failed"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       }
@@ -84,13 +84,13 @@
             "description": "Contact found"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid id format"
           },
           "404": {
             "description": "Contact not found"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       },
@@ -126,7 +126,7 @@
             "description": "Contact not found"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       },
@@ -147,13 +147,13 @@
             "description": "Contact deleted successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid contact id format"
           },
           "404": {
             "description": "Contact not found"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       }
