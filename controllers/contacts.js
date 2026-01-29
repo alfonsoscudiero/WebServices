@@ -4,6 +4,18 @@
 // Used to validate request body for contacts endpoints
 const Joi = require("joi");
 
+// Normalize birthday to "YYYY-MM-DD" string
+const toIsoDateString = (dateValue) => {
+  // dateValue can be a Date (from Joi convert) OR a string
+  const d = dateValue instanceof Date ? dateValue : new Date(dateValue);
+
+  // Safety check (should not happen if Joi validation passed)
+  if (Number.isNaN(d.getTime())) return null;
+
+  // Convert to YYYY-MM-DD
+  return d.toISOString().slice(0, 10);
+};
+
 // Schema for validating contact data
 const contactSchema = Joi.object({
   firstName: Joi.string().trim().min(1).max(30),
@@ -106,13 +118,22 @@ const createContact = async (req, res) => {
       });
     }
 
-    // Build new contact object
+    // Normalize birthday to string YYYY-MM-DD
+    const birthdayStr = toIsoDateString(value.birthday);
+    if (!birthdayStr) {
+      return res.status(400).json({
+        message: "Validation failed",
+        details: ["birthday must be in YYYY-MM-DD format"],
+      });
+    }
+
+    // Build new contact object (birthday stored as STRING)
     const newContact = {
       firstName: value.firstName,
       lastName: value.lastName,
       email: value.email.toLowerCase(),
       favoriteColor: value.favoriteColor,
-      birthday: value.birthday,
+      birthday: birthdayStr,
     };
 
     // Insert
@@ -187,9 +208,20 @@ const updateContact = async (req, res) => {
       });
     }
 
+    // Normalize birthday to string YYYY-MM-DD
+    const birthdayStr = toIsoDateString(value.birthday);
+    if (!birthdayStr) {
+      return res.status(400).json({
+        message: "Validation failed",
+        details: ["birthday must be in YYYY-MM-DD format"],
+      });
+    }
+
+    // Birthday stored as STRING
     const updatedContact = {
       ...value,
       email: value.email.toLowerCase(),
+      birthday: birthdayStr,
     };
 
     const db = await connectToDatabase();
