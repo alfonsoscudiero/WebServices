@@ -1,14 +1,23 @@
+// swagger.js
 const swaggerAutogen = require("swagger-autogen")();
+
+const isProd = process.env.NODE_ENV === "production";
+
+// - Local:  http://localhost:3000
+// - Render: https://cse341-winter26.onrender.com
+const PUBLIC_HOST =
+  process.env.PUBLIC_HOST ||
+  (isProd ? "cse341-winter26.onrender.com" : "localhost:3000");
+
+const PUBLIC_SCHEME = process.env.PUBLIC_SCHEME || (isProd ? "https" : "http");
 
 const doc = {
   info: {
     title: "Contacts API Documentation",
     description: "CSE 341 – Contacts routes API documentation",
   },
-  host: process.env.RENDER_EXTERNAL_HOSTNAME
-    ? process.env.RENDER_EXTERNAL_HOSTNAME
-    : "localhost:3000",
-  schemes: [process.env.RENDER_EXTERNAL_HOSTNAME ? "https" : "http"],
+  host: PUBLIC_HOST,
+  schemes: [PUBLIC_SCHEME],
 
   // Reusable data model
   definitions: {

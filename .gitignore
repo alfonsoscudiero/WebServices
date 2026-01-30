@@ -7,3 +7,4 @@
 # can get very large.
 node_modules
 .env
+swagger.json
