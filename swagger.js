@@ -5,8 +5,10 @@ const doc = {
     title: "Contacts API Documentation",
     description: "CSE 341 – Contacts routes API documentation",
   },
-  host: "localhost:3000",
-  schemes: ["http"],
+  host: process.env.RENDER_EXTERNAL_HOSTNAME
+    ? process.env.RENDER_EXTERNAL_HOSTNAME
+    : "localhost:3000",
+  schemes: [process.env.RENDER_EXTERNAL_HOSTNAME ? "https" : "http"],
 
   // Reusable data model
   definitions: {
